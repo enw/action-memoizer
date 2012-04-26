@@ -1,0 +1,18 @@
+{
+  "author": "Elliot Winard <enw@caveteen.com> (http://www.elliotwinard.com/)",
+  "name": "action-memoizer",
+  "description": "Optimization for asynchronous javascript calls using the Action/Callback pattern.",
+  "version": "0.0.1",
+  "homepage": "https://github.com/enw/action-memoizer",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/enw/action-memoizer.git"
+  },
+  "main": "index.js",
+  "engines": {
+    "node": ">= 0.5.0 < 0.7.0"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "optionalDependencies": {}
+}
