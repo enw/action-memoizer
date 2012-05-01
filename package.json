@@ -8,11 +8,17 @@
     "type": "git",
     "url": "git://github.com/enw/action-memoizer.git"
   },
-  "main": "index.js",
+  "main": "Memoizer.js",
   "engines": {
     "node": ">= 0.5.0 < 0.7.0"
   },
   "dependencies": {},
-  "devDependencies": {},
+  "scripts" : {
+    "test": "make test"
+  },
+  "devDependencies": {
+    "mocha":">= 1.0.3",
+    "should":">=0.6.3"
+  },
   "optionalDependencies": {}
 }

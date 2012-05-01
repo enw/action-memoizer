@@ -1,0 +1,4 @@
+* add function memoization
+* add object/function memoization
+* add ttl
+* add tests
