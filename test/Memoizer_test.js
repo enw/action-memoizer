@@ -1,10 +1,11 @@
 var should = require('should')
+  , _ = require('underscore');
 
 function SlowCalculator() {
-  this.add = function (a, b, cb) { setTimeout(function () {cb(null, a+b)}, 4000); }
-  this.subtract = function (a, b, cb) { cb(null, a-b); }
-  this.multiply = function (a, b, cb) { cb(null, a*b); }
-  this.divide = function (a, b, cb) { cb(null, a/b); }
+  this.add = function (a, b, cb) { cb(null, a+b) }
+  this.subtract = function (a, b, cb) { cb(null, a-b) }
+  this.multiply = function (a, b, cb) { cb(null, a*b) }
+  this.divide = function (a, b, cb) { cb(null, a/b) }
 }
 
 var Memoizer = require ('../Memoizer');
@@ -26,5 +27,13 @@ describe('Memoizer', function(){
       (typeof mAdd).should.equal('function');
       // (typeof mSubtract).should.equal('function');
     });
+    
+    it('should return a memoized function', function (done) {
+      mAdd(1, 2, function (err, data) {
+        data.should.equal(3);
+        done();
+      })
+    });
+    
   })
 });
