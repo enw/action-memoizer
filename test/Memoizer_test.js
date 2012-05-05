@@ -2,7 +2,7 @@ var should = require('should')
   , _ = require('underscore');
 
 function SlowCalculator() {
-  this.add = function (a, b, cb) { cb(null, a+b) }
+  this.add = function (a, b, cb) { process.nextTick(function() {cb(null, a+b)}) }
   this.subtract = function (a, b, cb) { cb(null, a-b) }
   this.multiply = function (a, b, cb) { cb(null, a*b) }
   this.divide = function (a, b, cb) { cb(null, a/b) }
@@ -15,7 +15,7 @@ describe('Memoizer', function(){
   
   before(function(done) {
     calculator = new SlowCalculator();
-    mAdd = Memoizer.memoizeAction("add", calculator.add);
+    mAdd = Memoizer.memoizeAction("add", calculator.add, function (err, data) { console.log ("result",err, data)});
     // mSubtract = Memoizer.memoizeAction("subtract", calculator.subtract);
     // mMultiply = Memoizer.memoizeAction("multiply", calculator.multiply);
     // mDivide = Memoizer.memoizeAction("divide", calculator.divide);
@@ -34,6 +34,16 @@ describe('Memoizer', function(){
         done();
       })
     });
+
+    it('should be cached later', function (done) {
+      setInterval(function () {
+        mAdd(1, 2, function (err, data) {
+          data.should.equal(3);
+          done();
+        })        
+      }, 1000);
+    });
+    
     
   })
 });
